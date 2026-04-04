@@ -1,11 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PakePlus</title>
-    </head>
-    <body>
-        PakePlus
-    </body>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宝宝识字卡</title>
+<style>
+* {
+  margin:0; padding:0; box-sizing:border-box;
+}
+body {
+  background:#fef8f0;
+  font-family:"Microsoft YaHei", sans-serif;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+  padding:20px;
+}
+.title {
+  font-size:28px;
+  color:#ff6b6b;
+  margin-bottom:20px;
+}
+.card {
+  background:white;
+  width:280px;
+  height:360px;
+  border-radius:24px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:20px;
+}
+.char {
+  font-size:120px;
+  font-weight:bold;
+  color:#333;
+}
+.emoji {
+  font-size:60px;
+}
+.buttons {
+  margin-top:30px;
+  display:flex;
+  gap:20px;
+}
+button {
+  padding:14px 28px;
+  font-size:20px;
+  border:none;
+  border-radius:16px;
+  background:#ff9999;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+button:active {
+  background:#ff6b6b;
+}
+</style>
+</head>
+<body>
+
+<div class="title">宝宝识字 📚</div>
+<div class="card">
+  <div class="char" id="char">天</div>
+  <div class="emoji" id="emoji">☁️</div>
+</div>
+<div class="buttons">
+  <button onclick="prev()">上一页</button>
+  <button onclick="next()">下一页</button>
+</div>
+
+<script>
+const list = [
+  {c:"天",e:"☁️"},{c:"地",e:"🌍"},{c:"人",e:"👶"},
+  {c:"上",e:"⬆️"},{c:"下",e:"⬇️"},{c:"左",e:"⬅️"},{c:"右",e:"➡️"},
+  {c:"手",e:"✋"},{c:"足",e:"🦶"},{c:"口",e:"👄"},{c:"目",e:"👀"},{c:"鼻",e:"👃"},
+  {c:"郭",e:"👤"},{c:"芯",e:"🌱"},{c:"雨",e:"🌧️"},{c:"田",e:"🌾"},
+  {c:"花",e:"🌸"},{c:"伞",e:"☂️"},{c:"水",e:"💧"},{c:"雪",e:"❄️"},
+  {c:"小",e:"🐣"},{c:"大",e:"🐘"},{c:"火",e:"🔥"},{c:"山",e:"⛰️"},
+  {c:"车",e:"🚗"},{c:"木",e:"🌳"},{c:"芳",e:"🌺"},{c:"东",e:"🌅"},{c:"波",e:"🌊"},
+  {c:"头",e:"👧"},{c:"脚",e:"🦶"},{c:"牛",e:"🐮"},{c:"马",e:"🐴"},{c:"羊",e:"🐑"},
+  {c:"鸟",e:"🐦"},{c:"鱼",e:"🐟"},{c:"虫",e:"🐛"},{c:"犬",e:"🐶"},{c:"兔",e:"🐰"},
+  {c:"听",e:"👂"},{c:"说",e:"🗣️"},{c:"笑",e:"😊"},{c:"哭",e:"😭"},
+  {c:"开",e:"🔓"},{c:"关",e:"🔒"},{c:"来",e:"👉"},{c:"去",e:"👈"}
+];
+
+let index = 0;
+function show() {
+  document.getElementById("char").innerText = list[index].c;
+  document.getElementById("emoji").innerText = list[index].e;
+}
+function prev() {
+  index = (index - 1 + list.length) % list.length;
+  show();
+}
+function next() {
+  index = (index + 1) % list.length;
+  show();
+}
+show();
+</script>
+
+</body>
 </html>
