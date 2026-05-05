@@ -63,6 +63,7 @@ body {
   align-items:center;
   justify-content:center;
   gap:20px;
+  position: relative;
 }
 .char {
   font-size:120px;
@@ -90,13 +91,22 @@ button {
 button:active {
   background:#ff6b6b;
 }
+.display_none{
+  display: none;
+}
+.xs {
+  position: absolute;
+  top:10px;
+  right: 10px;
+}
 </style>
 </head>
 <body>
 
-<div class="title">宝宝识字 📚</div>
+<div class="title">芯雨识字 📚</div>
 
 <button class="lib-btn" id="btnSwitchLib" onclick="switchLibrary()">切换到字库2</button>
+<button class="lib-btn" id="set_display_pic" onclick="switchLibrary()">全局隐藏提示</button>
 <div class="mode-bar">
   <button class="mode-btn active" id="btnSeq" onclick="setMode('seq')">顺序模式</button>
   <button class="mode-btn" id="btnRand" onclick="setMode('rand')">随机模式</button>
@@ -106,8 +116,9 @@ button:active {
 
 
 <div class="card">
+  <div class="xs" onclick="xs()">👀</div>
   <div class="char" id="char">天</div>
-  <div class="emoji" id="emoji">☁️</div>
+  <div class="emoji display_none" id="emoji">☁️</div>
 </div>
 
 <div class="buttons">
@@ -120,7 +131,7 @@ button:active {
 const lib1 = [
   {c:"天",e:"☁️"},{c:"地",e:"🌍"},
   {c:"上",e:"⬆️"},{c:"下",e:"⬇️"},{c:"左",e:"⬅️"},{c:"右",e:"➡️"},
-  {c:"大",e:"🐘"},{c:"小",e:"🐣"},{c:"多",e:"少🎶"},{c:"少",e:"🎵"},
+  {c:"大",e:"🐘"},{c:"小",e:"🐣"},{c:"多",e:"🎶"},{c:"少",e:"🎵"},
   {c:"人",e:"👮‍"},{c:"手",e:"✋"},{c:"足",e:"🦶"},{c:"口",e:"👄"},{c:"目",e:"👀"},{c:"鼻",e:"👃"},{c:"眼",e:"👀"},
   {c:"耳",e:"👂‍"},{c:"牙",e:"‍🦷"},
   {c:"头",e:"👶"},{c:"刀",e:"🔪"},
@@ -163,7 +174,12 @@ let currentLib = lib1;
 let libIndex = 1;
 let index = 0;
 let mode = "seq";
-
+function xs(){
+  const ts = document.getElementsByClassName('emoji')
+  for (let element of ts) {
+    element.classList.toggle('display_none');
+  }
+}
 function show() {
   document.getElementById("char").innerText = currentLib[index].c;
   document.getElementById("emoji").innerText = currentLib[index].e;
